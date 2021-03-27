@@ -10,43 +10,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedicon = 1;
-  final tabs = [];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Let's Talk",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-            ),
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: TextButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.add_circle_outline_outlined,
-            size: 30,
-            color: Colors.black,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.search,
-              size: 30,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-      body: SafeArea(
+    final tabs = [
+      Center(child: Text('Search')),
+      SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -165,70 +133,46 @@ class _HomeState extends State<Home> {
                         ),
                       )),
             ),
-
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: Colors.white54,
-            //     borderRadius: BorderRadius.only(
-            //       topRight: Radius.circular(25),
-            //       topLeft: Radius.circular(25),
-            //     ),
-            //   ),
-            //   padding: EdgeInsets.only(left: 40, right: 40),
-            //   height: 70,
-            //   width: double.infinity,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Stack(
-            //         children: [
-            //           IconButton(
-            //             icon: Icon(
-            //               Icons.message_outlined,
-            //               size: 27,
-            //             ),
-            //             focusColor: Colors.green,
-            //             onPressed: () {},
-            //           ),
-            //           Container(
-            //             height: 13,
-            //             width: 13,
-            //             decoration: BoxDecoration(
-            //                 color: Colors.red,
-            //                 shape: BoxShape.circle,
-            //                 border: Border.all(
-            //                   color: Colors.white60,
-            //                 )),
-            //           ),
-            //         ],
-            //       ),
-            //       IconButton(
-            //         icon: Icon(
-            //           Icons.phone_outlined,
-            //           size: 27,
-            //         ),
-            //         onPressed: () {},
-            //       ),
-            //       IconButton(
-            //         icon: Icon(
-            //           Icons.camera_alt_outlined,
-            //           size: 27,
-            //         ),
-            //         onPressed: () {},
-            //       ),
-            //       TextButton(
-            //         onPressed: () {},
-            //         child: CircleAvatar(
-            //           backgroundImage: AssetImage("images/akash.png"),
-            //           radius: 17,
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
+      Center(child: Text('home')),
+      Center(child: Text('phone')),
+      Center(child: Text('photo')),
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "Let's Talk",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+            ),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: TextButton(
+          onPressed: () {},
+          child: Icon(
+            Icons.add_circle_outline_outlined,
+            size: 30,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Icon(
+              Icons.search,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      body: tabs[_selectedicon],
       bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
