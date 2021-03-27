@@ -62,7 +62,33 @@ class _ProfileState extends State<Profile> {
                 'Software Engineer',
                 style: TextStyle(),
               ),
-            )
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.pending_actions_rounded,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.settings,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.notifications_none_outlined,
+                  size: 30,
+                ),
+              ],
+            ),
           ],
         ),
       ),
