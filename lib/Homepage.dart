@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/status.dart';
 import 'package:chat_app/chat_list.dart';
 import 'package:flutter/widgets.dart';
+import 'package:chat_app/profile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,11 +14,25 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Center(child: Text('Search')),
+      Center(
+        child: Text('Search'),
+      ),
+      /////////
+      // Search - Home////
+      ////////
       SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: Text(
+                "Let's Talk",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25,
+                ),
+              ),
+            ),
             Status(),
             SizedBox(
               height: 25,
@@ -136,9 +151,15 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      Center(child: Text('home')),
-      Center(child: Text('phone')),
-      Center(child: Text('photo')),
+      /////////
+      //Home - Phone
+      Center(
+        child: Text('home'),
+      ),
+      ///////
+      //phone - Photo
+      ///////
+      Profile(),
     ];
     return Scaffold(
       appBar: AppBar(
