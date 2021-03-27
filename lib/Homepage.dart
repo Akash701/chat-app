@@ -9,20 +9,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // TabController _tabController;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _tabController = new TabController(vsync:, length: 3);
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _tabController.dispose();
-  //   super.dispose();
-  // }
-
+  int _selectedicon = 1;
+  final tabs = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,68 +165,107 @@ class _HomeState extends State<Home> {
                         ),
                       )),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white54,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(25),
-                  topLeft: Radius.circular(25),
-                ),
-              ),
-              padding: EdgeInsets.only(left: 40, right: 40),
-              height: 70,
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Stack(
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.message_outlined,
-                          size: 27,
-                        ),
-                        focusColor: Colors.green,
-                        onPressed: () {},
-                      ),
-                      Container(
-                        height: 13,
-                        width: 13,
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white60,
-                            )),
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.phone_outlined,
-                      size: 27,
-                    ),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.camera_alt_outlined,
-                      size: 27,
-                    ),
-                    onPressed: () {},
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage("images/akash.png"),
-                      radius: 17,
-                    ),
-                  )
-                ],
-              ),
-            ),
+
+            // Container(
+            //   decoration: BoxDecoration(
+            //     color: Colors.white54,
+            //     borderRadius: BorderRadius.only(
+            //       topRight: Radius.circular(25),
+            //       topLeft: Radius.circular(25),
+            //     ),
+            //   ),
+            //   padding: EdgeInsets.only(left: 40, right: 40),
+            //   height: 70,
+            //   width: double.infinity,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Stack(
+            //         children: [
+            //           IconButton(
+            //             icon: Icon(
+            //               Icons.message_outlined,
+            //               size: 27,
+            //             ),
+            //             focusColor: Colors.green,
+            //             onPressed: () {},
+            //           ),
+            //           Container(
+            //             height: 13,
+            //             width: 13,
+            //             decoration: BoxDecoration(
+            //                 color: Colors.red,
+            //                 shape: BoxShape.circle,
+            //                 border: Border.all(
+            //                   color: Colors.white60,
+            //                 )),
+            //           ),
+            //         ],
+            //       ),
+            //       IconButton(
+            //         icon: Icon(
+            //           Icons.phone_outlined,
+            //           size: 27,
+            //         ),
+            //         onPressed: () {},
+            //       ),
+            //       IconButton(
+            //         icon: Icon(
+            //           Icons.camera_alt_outlined,
+            //           size: 27,
+            //         ),
+            //         onPressed: () {},
+            //       ),
+            //       TextButton(
+            //         onPressed: () {},
+            //         child: CircleAvatar(
+            //           backgroundImage: AssetImage("images/akash.png"),
+            //           radius: 17,
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        // type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedIconTheme: IconThemeData(size: 30),
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.black54,
+        // unselectedItemColor: Colors.white,
+        currentIndex: _selectedicon,
+        onTap: (index) {
+          setState(() {
+            _selectedicon = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.camera_alt_outlined,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_outlined,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.phone_outlined,
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+              icon: CircleAvatar(
+                backgroundImage: AssetImage("images/akash.png"),
+                radius: 14,
+              ),
+              label: ""),
+        ],
       ),
     );
   }
