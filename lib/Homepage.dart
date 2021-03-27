@@ -14,8 +14,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Center(
-        child: Text('Search'),
+      SafeArea(
+        child: Container(
+          child: Center(
+            child: Text(
+              'Search',
+            ),
+          ),
+        ),
       ),
       /////////
       // Search - Home////
@@ -24,14 +30,37 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Text(
-                "Let's Talk",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 25,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.search,
+                    size: 30,
+                    color: Colors.black,
+                    // color: Colors.black,
+                  ),
                 ),
-              ),
+                Center(
+                  child: Text(
+                    "Let's Talk",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.add_circle_outline_outlined,
+                    size: 30,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
             Status(),
             SizedBox(
@@ -162,37 +191,22 @@ class _HomeState extends State<Home> {
       Profile(),
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Let's Talk",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-            ),
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: TextButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.add_circle_outline_outlined,
-            size: 30,
-            color: Colors.black,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.search,
-              size: 30,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: Center(
+      //     child: Text(
+      //       "Let's Talk",
+      //       style: TextStyle(
+      //         color: Colors.black,
+      //         fontSize: 25,
+      //       ),
+      //     ),
+      //   ),
+      //   elevation: 0,
+      //   backgroundColor: Colors.white,
+      //   leading: TextButton(
+      //   actions: [
+      //   ],
+      // ),
       body: tabs[_selectedicon],
       bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
