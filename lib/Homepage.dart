@@ -3,6 +3,7 @@ import 'package:chat_app/status.dart';
 import 'package:chat_app/chat_list.dart';
 import 'package:flutter/widgets.dart';
 import 'package:chat_app/profile.dart';
+import 'package:chat_app/phone.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -36,10 +37,9 @@ class _HomeState extends State<Home> {
                 TextButton(
                   onPressed: () {},
                   child: Icon(
-                    Icons.search,
+                    Icons.add_circle_outline_outlined,
                     size: 30,
                     color: Colors.black,
-                    // color: Colors.black,
                   ),
                 ),
                 Center(
@@ -55,9 +55,10 @@ class _HomeState extends State<Home> {
                 TextButton(
                   onPressed: () {},
                   child: Icon(
-                    Icons.add_circle_outline_outlined,
+                    Icons.search,
                     size: 30,
                     color: Colors.black,
+                    // color: Colors.black,
                   ),
                 ),
               ],
@@ -113,78 +114,76 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: chat.length,
-                  itemBuilder: (context, int index) => Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                        child: Row(
+                itemCount: chat.length,
+                itemBuilder: (context, int index) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Stack(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: AssetImage(chat[index].image),
+                            radius: 30,
+                          ),
+                          Container(
+                            height: 16,
+                            width: 16,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white60,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Stack(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(chat[index].image),
-                                  radius: 30,
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Text(
+                                chat[index].name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
                                 ),
-                                Container(
-                                  height: 16,
-                                  width: 16,
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.white60,
-                                      )),
-                                ),
-                              ],
+                              ),
                             ),
-                            Expanded(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    chat[index].name,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Opacity(
+                                opacity: 0.64,
+                                child: Text(
+                                  chat[index].lastMessage,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Opacity(
-                                    opacity: 0.64,
-                                    child: Text(
-                                      chat[index].lastMessage,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Text(chat[index].time),
-                                ),
-                              ],
-                            ))
+                              ),
+                            ),
                           ],
                         ),
-                      )),
+                      ),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(right: 10),
+                        child: Text(chat[index].time),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
       /////////
       //Home - Phone
-      Center(
-        child: Text('home'),
-      ),
+      Phone(),
       ///////
       //phone - Photo
       ///////

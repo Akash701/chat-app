@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/chat_list.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -118,7 +117,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Text(
-                    'Vedios',
+                    'Videos',
                     style: TextStyle(
                       fontSize: 17,
                       color: Colors.black,
