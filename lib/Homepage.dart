@@ -191,22 +191,6 @@ class _HomeState extends State<Home> {
       Profile(),
     ];
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Center(
-      //     child: Text(
-      //       "Let's Talk",
-      //       style: TextStyle(
-      //         color: Colors.black,
-      //         fontSize: 25,
-      //       ),
-      //     ),
-      //   ),
-      //   elevation: 0,
-      //   backgroundColor: Colors.white,
-      //   leading: TextButton(
-      //   actions: [
-      //   ],
-      // ),
       body: tabs[_selectedicon],
       bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
@@ -239,9 +223,12 @@ class _HomeState extends State<Home> {
             label: "",
           ),
           BottomNavigationBarItem(
-              icon: CircleAvatar(
-                backgroundImage: AssetImage("images/akash.png"),
-                radius: 14,
+              icon: Hero(
+                tag: 'akash',
+                child: CircleAvatar(
+                  backgroundImage: AssetImage("images/akash.png"),
+                  radius: 14,
+                ),
               ),
               label: ""),
         ],

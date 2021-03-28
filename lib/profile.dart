@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/chat_list.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -21,23 +22,29 @@ class _ProfileState extends State<Profile> {
             Center(
               child: Stack(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("images/akash.png"),
-                    radius: 70,
+                  Hero(
+                    tag: 'akash',
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("images/akash.png"),
+                      radius: 70,
+                    ),
                   ),
                   Container(
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     decoration: BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: Colors.green,
                         )),
-                    margin: EdgeInsets.only(top: 100, left: 100),
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
+                    margin: EdgeInsets.only(top: 90, left: 100),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -70,8 +77,9 @@ class _ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.pending_actions_rounded,
+                  Icons.edit,
                   size: 30,
+                  color: Colors.blue[700],
                 ),
                 SizedBox(
                   width: 20,
@@ -79,6 +87,7 @@ class _ProfileState extends State<Profile> {
                 Icon(
                   Icons.settings,
                   size: 30,
+                  color: Colors.blue[700],
                 ),
                 SizedBox(
                   width: 20,
@@ -86,9 +95,157 @@ class _ProfileState extends State<Profile> {
                 Icon(
                   Icons.notifications_none_outlined,
                   size: 30,
+                  color: Colors.blue[700],
                 ),
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            DefaultTabController(
+              length: 4,
+              child: TabBar(
+                physics: ClampingScrollPhysics(),
+                //indicatorSize: TabBarIndicatorSize.label,
+                //indicatorWeight: 5,
+                automaticIndicatorColorAdjustment: true,
+                tabs: [
+                  Text(
+                    'Photos',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    'Vedios',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    'Audios',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    'Docs',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/akash.png",
+                              scale: 5,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/abhiram.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/colony.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/hegzy.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/kiran.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/arjun.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/remya.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              "images/vidya.jpg",
+                              scale: 10,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
