@@ -13,6 +13,21 @@ class _PhoneState extends State<Phone> {
       child: Scaffold(
         body: Column(
           children: [
+            Container(
+              margin: EdgeInsets.only(left: 10),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Calls",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Divider(
+              thickness: 5,
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: chat.length,

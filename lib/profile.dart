@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -7,6 +9,80 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  File imageFile;
+  final picker = ImagePicker();
+
+  _openGallery(BuildContext context) async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    this.setState(() {
+      if (pickedFile != null) {
+        imageFile = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+    Navigator.pop(context);
+  }
+
+  _openCamera(BuildContext context) async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    this.setState(() {
+      if (pickedFile != null) {
+        imageFile = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+    Navigator.pop(context);
+  }
+
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Profile Photo'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.image_outlined),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      GestureDetector(
+                        child: Text('Gallery'),
+                        onTap: () {
+                          _openGallery(context);
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.camera_alt_outlined),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      GestureDetector(
+                        child: Text('Camera'),
+                        onTap: () {
+                          _openCamera(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +97,11 @@ class _ProfileState extends State<Profile> {
             Center(
               child: Stack(
                 children: [
-                  Hero(
-                    tag: 'akash',
+                  Container(
                     child: CircleAvatar(
-                      backgroundImage: AssetImage("images/akash.png"),
+                      backgroundImage: imageFile == null
+                          ? AssetImage('images/akash.png')
+                          : FileImage(File(imageFile.path)),
                       radius: 70,
                     ),
                   ),
@@ -39,7 +116,9 @@ class _ProfileState extends State<Profile> {
                         )),
                     margin: EdgeInsets.only(top: 90, left: 100),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _showChoiceDialog(context);
+                      },
                       icon: Icon(
                         Icons.camera_alt,
                         color: Colors.white,
