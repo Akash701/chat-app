@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
-import '';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
-class Status extends StatelessWidget {
+class Status extends StatefulWidget {
+  @override
+  _StatusState createState() => _StatusState();
+}
+
+class _StatusState extends State<Status> {
+  File imageFile;
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
+    // Profile profile = Profile();
     return Container(
       margin: EdgeInsets.only(left: 20),
       height: 100,
@@ -14,7 +24,9 @@ class Status extends StatelessWidget {
           Column(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage("images/akash.png"),
+                backgroundImage: imageFile == null
+                    ? AssetImage('images/akash.png')
+                    : FileImage(File(imageFile.path)),
                 radius: 40,
               ),
               Text('You'),

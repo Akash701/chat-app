@@ -4,6 +4,9 @@ import 'package:chat_app/chat_list.dart';
 import 'package:flutter/widgets.dart';
 import 'package:chat_app/profile.dart';
 import 'package:chat_app/phone.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:chat_app/Camera.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,18 +14,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Camera camera = Camera();
   int _selectedicon = 1;
+  File imageFile;
+  final picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     final tabs = [
       SafeArea(
-        child: Container(
-          child: Center(
-            child: Text(
-              'Search',
-            ),
-          ),
-        ),
+        child: Camera(),
       ),
       /////////
       // Search - Home////
@@ -225,7 +225,9 @@ class _HomeState extends State<Home> {
               icon: Hero(
                 tag: 'akash',
                 child: CircleAvatar(
-                  backgroundImage: AssetImage("images/akash.png"),
+                  backgroundImage: imageFile == null
+                      ? AssetImage('images/akash.png')
+                      : FileImage(File(imageFile.path)),
                   radius: 14,
                 ),
               ),

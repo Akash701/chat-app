@@ -11,8 +11,12 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   File imageFile;
   final picker = ImagePicker();
+  List<File> images = List<File>();
 
   _openGallery(BuildContext context) async {
+    // images.add(
+    //   await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20),
+    // );
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     this.setState(() {
       if (pickedFile != null) {
@@ -85,6 +89,15 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    Widget profilePic(double size) {
+      return CircleAvatar(
+        backgroundImage: imageFile == null
+            ? AssetImage('images/akash.png')
+            : FileImage(File(imageFile.path)),
+        radius: size,
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -98,12 +111,7 @@ class _ProfileState extends State<Profile> {
               child: Stack(
                 children: [
                   Container(
-                    child: CircleAvatar(
-                      backgroundImage: imageFile == null
-                          ? AssetImage('images/akash.png')
-                          : FileImage(File(imageFile.path)),
-                      radius: 70,
-                    ),
+                    child: profilePic(70),
                   ),
                   Container(
                     height: 50,
