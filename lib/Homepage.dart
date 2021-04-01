@@ -7,6 +7,7 @@ import 'package:chat_app/phone.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:chat_app/Camera.dart';
+import 'package:chat_app/messages.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,6 +15,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future _openCamera(BuildContext context) async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    this.setState(() {
+      if (pickedFile != null) {
+        imageFile = File(pickedFile.path);
+      } else {
+        Navigator.pop(context);
+      }
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return Home();
+    }));
+  }
+
   Camera camera = Camera();
   int _selectedicon = 1;
   File imageFile;
@@ -22,10 +37,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final tabs = [
       SafeArea(
-        child: Camera(),
-      ),
+          // child: Camera(),
+          ),
       /////////
-      // Search - Home////
+      // Camera - Home////
       ////////
       SafeArea(
         child: Column(
@@ -115,65 +130,77 @@ class _HomeState extends State<Home> {
             Expanded(
               child: ListView.builder(
                 itemCount: chat.length,
-                itemBuilder: (context, int index) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: AssetImage(chat[index].image),
-                            radius: 30,
-                          ),
-                          Container(
-                            height: 16,
-                            width: 16,
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white60,
-                                )),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                itemBuilder: (context, int index) => InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Messages();
+                    }));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    child: Row(
+                      children: [
+                        Stack(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              child: Text(
-                                chat[index].name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                ),
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage(chat[index].image),
+                              radius: 30,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              child: Opacity(
-                                opacity: 0.64,
-                                child: Text(
-                                  chat[index].lastMessage,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Container(
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white60,
+                                    )),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        margin: EdgeInsets.only(right: 10),
-                        child: Text(chat[index].time),
-                      ),
-                    ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  chat[index].name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Opacity(
+                                  opacity: 0.64,
+                                  child: Text(
+                                    chat[index].lastMessage,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          margin: EdgeInsets.only(right: 10),
+                          child: Text(chat[index].time),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -206,8 +233,13 @@ class _HomeState extends State<Home> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.camera_alt_outlined,
+              icon: IconButton(
+                onPressed: () {
+                  _openCamera(context);
+                },
+                icon: Icon(
+                  Icons.camera_alt_outlined,
+                ),
               ),
               label: ""),
           BottomNavigationBarItem(

@@ -11,7 +11,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   File imageFile;
   final picker = ImagePicker();
-  List<File> images = List<File>();
+  // List<File> images = List<File>();
 
   _openGallery(BuildContext context) async {
     // images.add(
